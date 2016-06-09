@@ -40,7 +40,7 @@ public class ObjLoadActivity extends AppCompatActivity {
             getCurrentScene().addLight(light);
             getCurrentCamera().setZ(8);
 
-            LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.multiobjects_obj);
+            LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
             try {
                 objParser.parse();
                 objectGroup = objParser.getParsedObject();
