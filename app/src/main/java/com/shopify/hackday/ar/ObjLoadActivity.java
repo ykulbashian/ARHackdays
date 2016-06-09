@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
-import android.view.View;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.animation.Animation;
@@ -19,7 +18,6 @@ import org.rajawali3d.renderer.ISurfaceRenderer;
 import org.rajawali3d.renderer.Renderer;
 import org.rajawali3d.view.ISurface;
 import org.rajawali3d.view.SurfaceView;
-import org.rajawali3d.view.TextureView;
 
 public class ObjLoadActivity extends AppCompatActivity {
 
