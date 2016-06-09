@@ -31,7 +31,7 @@
         var key = shopID + productID;
         var modelString = btoa(file);
 
-        firebase.database().ref(key).set({ modelString: modelString })
+        firebase.database().ref(key).set(modelString);
 
         alert("Model successfully uploaded!");
         document.getElementById('shop_id').reset();
