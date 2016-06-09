@@ -34,9 +34,9 @@ import com.vuforia.Vec2F;
 import com.vuforia.Vuforia;
 import com.vuforia.Word;
 import com.vuforia.WordResult;
-import com.shopify.hackday.ar.SampleApplication.SampleApplicationSession;
-import com.shopify.hackday.ar.SampleApplication.utils.LineShaders;
-import com.shopify.hackday.ar.SampleApplication.utils.SampleUtils;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.LineShaders;
+import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
 
 
 // The renderer class for the ImageTargets sample. 

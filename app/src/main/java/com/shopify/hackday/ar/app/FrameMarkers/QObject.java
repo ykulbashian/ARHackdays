@@ -10,7 +10,7 @@ countries.
 package com.shopify.hackday.ar.app.FrameMarkers;
 
 import java.nio.Buffer;
-import com.shopify.hackday.ar.SampleApplication.utils.MeshObject;
+import com.shopify.hackday.ar.vuforia.utils.MeshObject;
 
 
 public class QObject extends MeshObject

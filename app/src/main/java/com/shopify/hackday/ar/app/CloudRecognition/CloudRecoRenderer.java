@@ -25,11 +25,11 @@ import com.vuforia.Tool;
 import com.vuforia.TrackableResult;
 import com.vuforia.VIDEO_BACKGROUND_REFLECTION;
 import com.vuforia.Vuforia;
-import com.shopify.hackday.ar.SampleApplication.SampleApplicationSession;
-import com.shopify.hackday.ar.SampleApplication.utils.CubeShaders;
-import com.shopify.hackday.ar.SampleApplication.utils.SampleUtils;
-import com.shopify.hackday.ar.SampleApplication.utils.Teapot;
-import com.shopify.hackday.ar.SampleApplication.utils.Texture;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.CubeShaders;
+import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
+import com.shopify.hackday.ar.vuforia.utils.Teapot;
+import com.shopify.hackday.ar.vuforia.utils.Texture;
 
 
 // The renderer class for the CloudReco sample. 

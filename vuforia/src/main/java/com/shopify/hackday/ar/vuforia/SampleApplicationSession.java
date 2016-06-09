@@ -8,7 +8,7 @@ countries.
 ===============================================================================*/
 
 
-package com.shopify.hackday.ar.SampleApplication;
+package com.shopify.hackday.ar.vuforia;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;

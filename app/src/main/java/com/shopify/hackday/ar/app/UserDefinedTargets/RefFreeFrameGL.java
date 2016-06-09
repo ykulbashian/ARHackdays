@@ -22,9 +22,9 @@ import com.vuforia.Matrix44F;
 import com.vuforia.Renderer;
 import com.vuforia.Vec4F;
 import com.vuforia.VideoBackgroundConfig;
-import com.shopify.hackday.ar.SampleApplication.SampleApplicationSession;
-import com.shopify.hackday.ar.SampleApplication.utils.SampleUtils;
-import com.shopify.hackday.ar.SampleApplication.utils.Texture;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
+import com.shopify.hackday.ar.vuforia.utils.Texture;
 
 
 public class RefFreeFrameGL

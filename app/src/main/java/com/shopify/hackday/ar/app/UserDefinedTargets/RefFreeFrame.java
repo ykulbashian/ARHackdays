@@ -18,8 +18,8 @@ import com.vuforia.TrackableSource;
 import com.vuforia.TrackerManager;
 import com.vuforia.Vec2F;
 import com.vuforia.VideoBackgroundConfig;
-import com.shopify.hackday.ar.SampleApplication.SampleApplicationSession;
-import com.shopify.hackday.ar.SampleApplication.utils.SampleUtils;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
 
 
 public class RefFreeFrame

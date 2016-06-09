@@ -7,7 +7,7 @@ Vuforia is a trademark of PTC Inc., registered in the United States and other
 countries.
 ===============================================================================*/
 
-package com.shopify.hackday.ar.SampleApplication.utils;
+package com.shopify.hackday.ar.vuforia.utils;
 
 import android.opengl.GLES20;
 import android.util.Log;
