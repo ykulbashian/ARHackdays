@@ -49,7 +49,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     
     public boolean mIsActive = false;
     
-    private VirtualButtons mActivity;
+    private VirtualButtonsActivity mActivity;
     
     private Vector<Texture> mTextures;
     
@@ -75,7 +75,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     static private float kTeapotScale = 3.f;
     
     
-    public VirtualButtonRenderer(VirtualButtons activity,
+    public VirtualButtonRenderer(VirtualButtonsActivity activity,
         SampleApplicationSession session)
     {
         mActivity = activity;
@@ -238,7 +238,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
                 
                 int buttonIndex = 0;
                 // Run through button name array to find button index
-                for (int j = 0; j < VirtualButtons.NUM_BUTTONS; ++j)
+                for (int j = 0; j < VirtualButtonsActivity.NUM_BUTTONS; ++j)
                 {
                     if (button.getName().compareTo(
                         mActivity.virtualButtonColors[j]) == 0)
@@ -337,7 +337,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
                 GLES20.glDrawArrays(GLES20.GL_LINES, 0,
                     imageTargetResult.getNumVirtualButtons() * 8);
                 
-                SampleUtils.checkGLError("VirtualButtons drawButton");
+                SampleUtils.checkGLError("VirtualButtonsActivity drawButton");
                 
                 GLES20.glDisableVertexAttribArray(vbVertexHandle);
             }
@@ -383,7 +383,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
             GLES20.glDisableVertexAttribArray(normalHandle);
             GLES20.glDisableVertexAttribArray(textureCoordHandle);
             
-            SampleUtils.checkGLError("VirtualButtons renderFrame");
+            SampleUtils.checkGLError("VirtualButtonsActivity renderFrame");
             
         }
         

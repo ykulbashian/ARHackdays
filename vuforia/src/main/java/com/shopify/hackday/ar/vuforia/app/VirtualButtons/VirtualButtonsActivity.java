@@ -52,8 +52,8 @@ import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
 import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
 
 
-// The main activity for the VirtualButtons sample. 
-public class VirtualButtons extends Activity implements
+// The main activity for the VirtualButtonsActivity sample.
+public class VirtualButtonsActivity extends Activity implements
     SampleApplicationControl, SampleAppMenuInterface
 {
     private static final String LOGTAG = "VirtualButtons";
@@ -496,7 +496,7 @@ public class VirtualButtons extends Activity implements
                 
                 // Generates an Alert Dialog to show the error message
                 AlertDialog.Builder builder = new AlertDialog.Builder(
-                    VirtualButtons.this);
+                    VirtualButtonsActivity.this);
                 builder
                     .setMessage(errorMessage)
                     .setTitle(getString(R.string.INIT_ERROR))
