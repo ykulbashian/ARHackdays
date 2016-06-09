@@ -22,6 +22,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
+import com.shopify.hackday.ar.vuforia.IHybridRenderer;
 import com.vuforia.Area;
 import com.vuforia.ImageTargetResult;
 import com.vuforia.Rectangle;
@@ -41,7 +42,7 @@ import com.shopify.hackday.ar.vuforia.utils.Teapot;
 import com.shopify.hackday.ar.vuforia.utils.Texture;
 
 
-public class VirtualButtonRenderer implements GLSurfaceView.Renderer
+public class VirtualButtonRenderer implements GLSurfaceView.Renderer, IHybridRenderer
 {
     private static final String LOGTAG = "VirtualButtonRenderer";
     
@@ -81,6 +82,10 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     {
         mActivity = activity;
         vuforiaAppSession = session;
+    }
+
+    public void setIsActive(boolean isActive){
+        this.mIsActive = isActive;
     }
     
     

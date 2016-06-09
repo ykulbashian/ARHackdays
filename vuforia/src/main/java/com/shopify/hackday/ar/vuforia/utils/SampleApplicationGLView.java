@@ -19,11 +19,15 @@ import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+import com.vuforia.Vuforia;
+
+import org.rajawali3d.view.SurfaceView;
+
 // Support class for the Vuforia sample applications
 // Responsible for setting up and configuring the OpenGL surface view.
 // This class does not contain any Vuforia specific code. 
 // You can use your own OpenGL implementation.
-public class SampleApplicationGLView extends GLSurfaceView
+public class SampleApplicationGLView extends SurfaceView
 {
     private static final String LOGTAG = "Vuforia_SampleGLView";
     
@@ -32,6 +36,15 @@ public class SampleApplicationGLView extends GLSurfaceView
     public SampleApplicationGLView(Context context)
     {
         super(context);
+
+        // Create OpenGL ES view:
+        int depthSize = 16;
+        int stencilSize = 0;
+        boolean translucent = Vuforia.requiresAlpha();
+
+        init(translucent, depthSize, stencilSize);
+
+        setTransparent(translucent);
     }
     
     
@@ -61,7 +74,7 @@ public class SampleApplicationGLView extends GLSurfaceView
         
         // Setup the context factory for 2.0 rendering
         setEGLContextFactory(new ContextFactory());
-        
+
         // We need to choose an EGLConfig that matches the format of
         // our surface exactly. This is going to be done in our
         // custom config chooser. See ConfigChooser class definition

@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -276,17 +277,15 @@ public class VirtualButtonsActivity extends Activity implements
     // Initializes AR application components.
     private void initApplicationAR()
     {
-        // Create OpenGL ES view:
-        int depthSize = 16;
-        int stencilSize = 0;
-        boolean translucent = Vuforia.requiresAlpha();
-        
         mGlView = new SampleApplicationGLView(this);
-        mGlView.init(translucent, depthSize, stencilSize);
         
-        mRenderer = new VirtualButtonRenderer(this, vuforiaAppSession);
+        mRenderer = getRenderer();
         mGlView.setRenderer(mRenderer);
         
+    }
+
+    protected VirtualButtonRenderer getRenderer(){
+        return new VirtualButtonRenderer(this, vuforiaAppSession);
     }
     
     
@@ -408,7 +407,7 @@ public class VirtualButtonsActivity extends Activity implements
         {
             initApplicationAR();
             
-            mRenderer.mIsActive = true;
+            mRenderer.setIsActive(true);
             
             // Now add the GL surface view. It is important
             // that the OpenGL ES surface view gets added
