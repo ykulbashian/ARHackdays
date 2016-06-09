@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "239866154309",
+    "firebase_url": "https://augmentedoddsandends.firebaseio.com",
+    "project_id": "augmentedoddsandends",
+    "storage_bucket": "augmentedoddsandends.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239866154309:android:9b2dbd4b2d55704e",
+        "android_client_info": {
+          "package_name": "com.shopify.hackday.ar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239866154309-dl0vhf98fhrgn9rprbok3eormr9ggn4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopify.hackday.ar",
+            "certificate_hash": "5FC68F799536BD8D3B4493238B2F182435A5345C"
+          }
+        },
+        {
+          "client_id": "239866154309-1f2fpkih33pnskki9vvajsc831jh105l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Ijl1qwTYCFhhZLyffIHCf9DlO-ZO_mo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239866154309-1f2fpkih33pnskki9vvajsc831jh105l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
