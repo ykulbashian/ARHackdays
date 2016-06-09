@@ -83,66 +83,6 @@
           'android:screenOrientation' or in code by calling
           Activity.setRequestedOrientation().
         -->
-        <!-- Splash Screen Activity -->
-         <activity
-            android:name=".ui.ActivityList.ActivitySplashScreen"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"
-            android:noHistory="true"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-         </activity>
-        
-        <activity
-            android:name=".ui.ActivityList.ActivityLauncher"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"
-            >
-        </activity>
-        
-         <activity
-            android:name=".ui.ActivityList.AboutScreen"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"
-            android:noHistory="true"
-            >
-        </activity>
-         
-        <activity
-            android:name=".app.ImageTargets.ImageTargets"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
-        
-        <activity
-            android:name=".app.TextRecognition.TextReco"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
-  	        android:launchMode="singleTask"
-            >
-        </activity>
-
-        <activity
-            android:name=".app.CylinderTargets.CylinderTargets"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
-        
-        <activity
-            android:name=".app.FrameMarkers.FrameMarkers"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
         
         <activity
             android:name=".app.VirtualButtons.VirtualButtons"
@@ -150,38 +90,11 @@
         	android:theme="@style/SampleAppsTheme"
  	        android:launchMode="singleTask"
             >
-        </activity>
-        
-        <activity
-            android:name=".app.UserDefinedTargets.UserDefinedTargets"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
-                
-        <activity
-            android:name=".app.MultiTargets.MultiTargets"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
-        
-        <activity
-            android:name=".app.CloudRecognition.CloudReco"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
-        </activity>
-         
-        <activity
-            android:name=".app.ObjectRecognition.ObjectTargets"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-        	android:theme="@style/SampleAppsTheme"
- 	        android:launchMode="singleTask"
-            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
          
     </application>
