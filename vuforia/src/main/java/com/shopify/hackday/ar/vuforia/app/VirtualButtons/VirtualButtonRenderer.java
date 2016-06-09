@@ -22,7 +22,6 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
-import com.shopify.hackday.ar.vuforia.IHybridRenderer;
 import com.vuforia.Area;
 import com.vuforia.ImageTargetResult;
 import com.vuforia.Rectangle;
