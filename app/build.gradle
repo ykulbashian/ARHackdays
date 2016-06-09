@@ -31,7 +31,6 @@ dependencies {
     // Latest Rajawali lib version
     compile 'org.rajawali3d:rajawali:1.1.517-SNAPSHOT@aar'
 
-//    compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'io.reactivex:rxjava:1.1.4'
     compile 'io.reactivex:rxandroid:1.2.0'
 
