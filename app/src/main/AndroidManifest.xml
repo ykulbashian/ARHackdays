@@ -85,7 +85,7 @@
         -->
         
         <activity
-            android:name=".app.VirtualButtons.VirtualButtons"
+            android:name=".vuforia.app.VirtualButtons.VirtualButtons"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
         	android:theme="@style/SampleAppsTheme"
  	        android:launchMode="singleTask"
