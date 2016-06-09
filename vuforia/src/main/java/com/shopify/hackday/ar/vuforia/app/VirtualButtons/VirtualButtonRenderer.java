@@ -42,7 +42,7 @@ import com.shopify.hackday.ar.vuforia.utils.Teapot;
 import com.shopify.hackday.ar.vuforia.utils.Texture;
 
 
-public class VirtualButtonRenderer implements GLSurfaceView.Renderer, IHybridRenderer
+public class VirtualButtonRenderer implements GLSurfaceView.Renderer
 {
     private static final String LOGTAG = "VirtualButtonRenderer";
     
