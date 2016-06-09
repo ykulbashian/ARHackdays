@@ -3,9 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+        mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
+        classpath 'com.google.gms:google-services:3.0.0'
 
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
@@ -14,9 +16,10 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        mavenCentral()
         jcenter()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        mavenLocal()
     }
 }
 
