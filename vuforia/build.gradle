@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+def VUFORIA_SDK_DIR = '../vuforia-sdk-android-5-5-9'
+def NATIVE_LIB_DIR = 'build/lib'
+def JAR_DIR = 'build/java/vuforia'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -22,10 +26,7 @@ android {
 }
 
 dependencies {
+    compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.4.0'
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:23.4.0'
 }

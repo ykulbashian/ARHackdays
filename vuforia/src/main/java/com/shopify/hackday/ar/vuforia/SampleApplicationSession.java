@@ -20,7 +20,7 @@ import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.WindowManager;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 import com.vuforia.CameraCalibration;
 import com.vuforia.CameraDevice;
 import com.vuforia.Matrix44F;
