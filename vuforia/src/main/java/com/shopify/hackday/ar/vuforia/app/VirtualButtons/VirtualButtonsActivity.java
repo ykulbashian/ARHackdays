@@ -46,7 +46,6 @@ import com.shopify.hackday.ar.vuforia.SampleApplicationException;
 import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
 import com.shopify.hackday.ar.vuforia.utils.LoadingDialogHandler;
 import com.shopify.hackday.ar.vuforia.utils.SampleApplicationGLView;
-import com.shopify.hackday.ar.vuforia.utils.Texture;
 import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenu;
 import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
 import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
@@ -74,9 +73,6 @@ public class VirtualButtonsActivity extends Activity implements
     
     private LoadingDialogHandler loadingDialogHandler = new LoadingDialogHandler(
         this);
-    
-    // The textures we will use for rendering:
-    private Vector<Texture> mTextures;
     
     private DataSet dataSet = null;
     
@@ -113,11 +109,7 @@ public class VirtualButtonsActivity extends Activity implements
         
         vuforiaAppSession
             .initAR(this, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        
-        // Load any sample specific textures:
-        mTextures = new Vector<Texture>();
-        loadTextures();
-        
+
         mGestureDetector = new GestureDetector(this, new GestureListener());
         
         mIsDroidDevice = android.os.Build.MODEL.toLowerCase().startsWith(
@@ -158,23 +150,6 @@ public class VirtualButtonsActivity extends Activity implements
             
             return true;
         }
-    }
-    
-    
-    // We want to load specific textures from the APK, which we will later use
-    // for rendering.
-    private void loadTextures()
-    {
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk(
-            "VirtualButtons/TextureTeapotYellow.png", getAssets()));
-        mTextures.add(Texture.loadTextureFromApk(
-            "VirtualButtons/TextureTeapotGreen.png", getAssets()));
     }
     
     
@@ -257,10 +232,8 @@ public class VirtualButtonsActivity extends Activity implements
         {
             Log.e(LOGTAG, e.getString());
         }
-        
-        // Unload texture:
-        mTextures.clear();
-        mTextures = null;
+
+        mRenderer.onSurfaceDestroyed();
         
         System.gc();
     }
@@ -312,7 +285,6 @@ public class VirtualButtonsActivity extends Activity implements
         mGlView.init(translucent, depthSize, stencilSize);
         
         mRenderer = new VirtualButtonRenderer(this, vuforiaAppSession);
-        mRenderer.setTextures(mTextures);
         mGlView.setRenderer(mRenderer);
         
     }

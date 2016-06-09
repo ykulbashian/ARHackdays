@@ -50,7 +50,8 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     public boolean mIsActive = false;
     
     private VirtualButtonsActivity mActivity;
-    
+
+    // The textures we will use for rendering:
     private Vector<Texture> mTextures;
     
     private Teapot mTeapot = new Teapot();
@@ -88,7 +89,13 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     public void onSurfaceCreated(GL10 gl, EGLConfig config)
     {
         Log.d(LOGTAG, "GLRenderer.onSurfaceCreated");
-        
+
+
+        // Load any sample specific textures:
+        mTextures = new Vector<Texture>();
+        loadTextures();
+
+
         // Call function to initialize rendering:
         initRendering();
         
@@ -96,7 +103,30 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
         // or after OpenGL ES context was lost (e.g. after onPause/onResume):
         vuforiaAppSession.onSurfaceCreated();
     }
-    
+
+    public void onSurfaceDestroyed(){
+
+        // Unload texture:
+        mTextures.clear();
+        mTextures = null;
+    }
+
+
+    // We want to load specific textures from the APK, which we will later use
+    // for rendering.
+    private void loadTextures()
+    {
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
+                mActivity.getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
+                mActivity.getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
+                mActivity.getAssets()));
+        mTextures.add(Texture.loadTextureFromApk(
+                "VirtualButtons/TextureTeapotYellow.png", mActivity.getAssets()));
+        mTextures.add(Texture.loadTextureFromApk(
+                "VirtualButtons/TextureTeapotGreen.png", mActivity.getAssets()));
+    }
     
     // Called when the surface changed size.
     @Override
@@ -408,13 +438,6 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
         bb.rewind();
         
         return bb;
-        
-    }
-    
-    
-    public void setTextures(Vector<Texture> textures)
-    {
-        mTextures = textures;
         
     }
     
