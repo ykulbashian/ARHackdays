@@ -65,7 +65,7 @@
         android:description="@string/app_description"
         android:launchMode="singleTask"
         android:allowBackup="true"
-        android:theme="@style/SampleAppsTheme"
+        android:theme="@style/AppTheme"
         >
         
 
