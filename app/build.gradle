@@ -1,56 +1,45 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
+
+def VUFORIA_SDK_DIR = '../vuforia-sdk-android-5-5-9'
+def NATIVE_LIB_DIR = 'build/lib'
+def JAR_DIR = 'build/java/vuforia'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    sourceSets.main {
+        jni.srcDirs = []
+        jniLibs.srcDir "$VUFORIA_SDK_DIR/$NATIVE_LIB_DIR/"
     }
+
     defaultConfig {
         applicationId "com.shopify.hackday.ar"
-        minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion 8
+        targetSdkVersion 22
+        versionCode 200
+        versionName "5.0"
     }
+
+    archivesBaseName = rootProject.projectDir.getName()
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.4.0'
-
-    // Latest Rajawali lib version
-    compile 'org.rajawali3d:rajawali:1.1.517-SNAPSHOT@aar'
-
-//    compile 'com.google.firebase:firebase-database:9.0.2'
-    compile 'io.reactivex:rxjava:1.1.4'
-    compile 'io.reactivex:rxandroid:1.2.0'
-
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
-    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
-    compile 'com.squareup.retrofit2:retrofit:2.0.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
-
-    compile 'com.facebook.stetho:stetho:1.3.1'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
-    compile 'com.facebook.stetho:stetho-urlconnection:1.3.1'
-
-    testCompile 'junit:junit:4.12'
-
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:23.4.0'
+    compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
 }
