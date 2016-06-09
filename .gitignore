@@ -1,0 +1,13 @@
+*.iml
+.gradle
+/local.properties
+/build
+/captures
+
+build
+**/*.iml
+.idea/**
+
+!/vuforia-sdk-android-5-5-9/**
+
+.DS_Store
