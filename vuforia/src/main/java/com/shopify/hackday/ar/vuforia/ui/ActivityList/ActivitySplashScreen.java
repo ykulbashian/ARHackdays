@@ -7,7 +7,7 @@ Vuforia is a trademark of PTC Inc., registered in the United States and other
 countries.
 ===============================================================================*/
 
-package com.shopify.hackday.ar.ui.ActivityList;
+package com.shopify.hackday.ar.vuforia.ui.ActivityList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 
 
 public class ActivitySplashScreen extends Activity

@@ -61,9 +61,9 @@ import com.shopify.hackday.ar.vuforia.utils.LoadingDialogHandler;
 import com.shopify.hackday.ar.vuforia.utils.SampleApplicationGLView;
 import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
 import com.shopify.hackday.ar.app.TextRecognition.TextRecoRenderer.WordDesc;
-import com.shopify.hackday.ar.ui.SampleAppMenu.SampleAppMenu;
-import com.shopify.hackday.ar.ui.SampleAppMenu.SampleAppMenuGroup;
-import com.shopify.hackday.ar.ui.SampleAppMenu.SampleAppMenuInterface;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenu;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
 
 
 public class TextReco extends Activity implements SampleApplicationControl,

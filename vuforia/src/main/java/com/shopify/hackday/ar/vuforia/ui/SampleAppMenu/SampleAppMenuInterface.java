@@ -7,7 +7,7 @@ Vuforia is a trademark of PTC Inc., registered in the United States and other
 countries.
 ===============================================================================*/
 
-package com.shopify.hackday.ar.ui.SampleAppMenu;
+package com.shopify.hackday.ar.vuforia.ui.SampleAppMenu;
 
 // To be implemented in the activities to handle any desired function 
 // previously set for a SampleAppMenu instance

@@ -7,7 +7,7 @@ Vuforia is a trademark of PTC Inc., registered in the United States and other
 countries.
 ===============================================================================*/
 
-package com.shopify.hackday.ar.ui.SampleAppMenu;
+package com.shopify.hackday.ar.vuforia.ui.SampleAppMenu;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 
 
 // Handles the sample apps menu settings

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.shopify.hackday.ar.ui.SampleAppMenu.SampleAppMenuView
+<com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,4 +36,4 @@
 	     </LinearLayout>
 	</ScrollView>
 	
-</com.shopify.hackday.ar.ui.SampleAppMenu.SampleAppMenuView>
+</com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuView>

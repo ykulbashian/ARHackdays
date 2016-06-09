@@ -7,7 +7,7 @@ Vuforia is a trademark of PTC Inc., registered in the United States and other
 countries.
 ===============================================================================*/
 
-package com.shopify.hackday.ar.ui.ActivityList;
+package com.shopify.hackday.ar.vuforia.ui.ActivityList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 
 
 public class AboutScreen extends Activity implements OnClickListener
@@ -104,11 +104,8 @@ public class AboutScreen extends Activity implements OnClickListener
     @Override
     public void onClick(View v)
     {
-        switch (v.getId())
-        {
-            case R.id.button_start:
+        if (v.getId() ==  R.id.button_start){
                 startARActivity();
-                break;
         }
     }
     

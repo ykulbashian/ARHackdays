@@ -8,7 +8,7 @@ countries.
 ===============================================================================*/
 
 
-package com.shopify.hackday.ar.ui.ActivityList;
+package com.shopify.hackday.ar.vuforia.ui.ActivityList;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 
 
 // This activity starts activities which demonstrate the Vuforia features

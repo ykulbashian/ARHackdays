@@ -8,7 +8,7 @@ countries.
 ===============================================================================*/
 
 
-package com.shopify.hackday.ar.ui.SampleAppMenu;
+package com.shopify.hackday.ar.vuforia.ui.SampleAppMenu;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.shopify.hackday.ar.R;
+import com.shopify.hackday.ar.vuforia.R;
 
 
 public class SampleAppMenuGroup
