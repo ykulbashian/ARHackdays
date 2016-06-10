@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AR</string>
+
+    <string name="app_name">Shopify AR</string>
+    <string name="app_description">Shopify AR</string>
+
+    
 </resources>
