@@ -9,39 +9,43 @@ countries.
 
 package com.shopify.hackday.ar.vuforia.app.VirtualButtons;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Vector;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
+import android.view.MotionEvent;
 
-import com.vuforia.Area;
+import com.shopify.hackday.ar.vuforia.R;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.CubeShaders;
+import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
+import com.shopify.hackday.ar.vuforia.utils.Teapot;
+import com.shopify.hackday.ar.vuforia.utils.Texture;
 import com.vuforia.ImageTargetResult;
-import com.vuforia.Rectangle;
 import com.vuforia.Renderer;
 import com.vuforia.State;
 import com.vuforia.Tool;
 import com.vuforia.TrackableResult;
 import com.vuforia.VIDEO_BACKGROUND_REFLECTION;
-import com.vuforia.VirtualButton;
-import com.vuforia.VirtualButtonResult;
 import com.vuforia.Vuforia;
-import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
-import com.shopify.hackday.ar.vuforia.utils.CubeShaders;
-import com.shopify.hackday.ar.vuforia.utils.LineShaders;
-import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
-import com.shopify.hackday.ar.vuforia.utils.Teapot;
-import com.shopify.hackday.ar.vuforia.utils.Texture;
+
+import org.rajawali3d.Object3D;
+import org.rajawali3d.animation.Animation;
+import org.rajawali3d.animation.Animation3D;
+import org.rajawali3d.animation.EllipticalOrbitAnimation3D;
+import org.rajawali3d.animation.RotateOnAxisAnimation;
+import org.rajawali3d.lights.PointLight;
+import org.rajawali3d.loader.LoaderOBJ;
+import org.rajawali3d.loader.ParsingException;
+import org.rajawali3d.math.vector.Vector3;
+
+import java.util.Vector;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 
-public class VirtualButtonRenderer implements GLSurfaceView.Renderer
+public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer implements GLSurfaceView.Renderer
 {
     private static final String LOGTAG = "VirtualButtonRenderer";
     
@@ -71,6 +75,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
     public VirtualButtonRenderer(VirtualButtonsActivity activity,
         SampleApplicationSession session)
     {
+        super(activity);
         mActivity = activity;
         vuforiaAppSession = session;
     }
@@ -94,7 +99,7 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
 
         // Call function to initialize rendering:
         initRendering();
-        
+
         // Call Vuforia function to (re)initialize rendering after first use
         // or after OpenGL ES context was lost (e.g. after onPause/onResume):
         vuforiaAppSession.onSurfaceCreated();
@@ -289,5 +294,58 @@ public class VirtualButtonRenderer implements GLSurfaceView.Renderer
         Renderer.getInstance().end();
         
     }
-    
+
+
+    private PointLight light;
+    private Object3D objectGroup;
+    private Animation3D cameraAnim, lightAnim;
+
+    @Override
+    protected void initScene() {
+
+        light = new PointLight();
+        light.setPosition(0, 0, 4);
+        light.setPower(8);
+
+        getCurrentScene().addLight(light);
+        getCurrentCamera().setZ(8);
+
+        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
+        try {
+            objParser.parse();
+            objectGroup = objParser.getParsedObject();
+            getCurrentScene().addChild(objectGroup);
+
+            cameraAnim = new RotateOnAxisAnimation(Vector3.Axis.Y, 360);
+            cameraAnim.setDurationMilliseconds(8000);
+            cameraAnim.setRepeatMode(Animation.RepeatMode.INFINITE);
+            cameraAnim.setTransformable3D(objectGroup);
+        } catch (ParsingException e) {
+            e.printStackTrace();
+        }
+
+        lightAnim = new EllipticalOrbitAnimation3D(new Vector3(),
+                new Vector3(0, 10, 0), Vector3.getAxisVector(Vector3.Axis.Z), 0,
+                360, EllipticalOrbitAnimation3D.OrbitDirection.CLOCKWISE);
+
+        lightAnim.setDurationMilliseconds(3000);
+        lightAnim.setRepeatMode(Animation.RepeatMode.INFINITE);
+        lightAnim.setTransformable3D(light);
+
+        getCurrentScene().registerAnimation(cameraAnim);
+        getCurrentScene().registerAnimation(lightAnim);
+
+        cameraAnim.play();
+        lightAnim.play();
+    }
+
+    @Override
+    public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
+
+    }
+
+    @Override
+    public void onTouchEvent(MotionEvent event) {
+
+    }
 }
