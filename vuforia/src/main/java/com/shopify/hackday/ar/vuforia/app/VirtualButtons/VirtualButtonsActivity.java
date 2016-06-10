@@ -640,7 +640,7 @@ public class VirtualButtonsActivity extends Activity implements
         }
         
         // Load the data set:
-        if (!dataSet.load("VirtualButtons/Wood.xml",
+        if (!dataSet.load("Shopify/shopify.xml",
             STORAGE_TYPE.STORAGE_APPRESOURCE))
         {
             Log.d(LOGTAG, "Failed to load data set.");
