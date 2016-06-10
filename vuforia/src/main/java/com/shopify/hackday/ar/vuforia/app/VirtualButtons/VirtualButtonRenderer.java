@@ -37,6 +37,8 @@ import org.rajawali3d.animation.Animation3D;
 import org.rajawali3d.lights.PointLight;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
+import org.rajawali3d.materials.Material;
+import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector3;
@@ -304,6 +306,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     private Point currentObjectPoint, previousObjectPoint;
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
+    private static final float SCALE_FACTOR = 50f;
 
     @Override
     protected void initScene() {
@@ -319,8 +322,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
         light1.setPosition(100, 100, 100);
         light1.setPower(200);
         light2 = new PointLight();
-        light2.setPosition(5, 5, 5);
-        light2.setPower(8);
+        light2.setPosition(5*SCALE_FACTOR, 5*SCALE_FACTOR, 5*SCALE_FACTOR);
+        light2.setPower(8*SCALE_FACTOR);
 
         getCurrentScene().addLight(light1);
         getCurrentScene().addLight(light2);
@@ -328,14 +331,25 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
 
         getCurrentCamera().setFarPlane(1000);
 
-        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
+        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.cube);
         try {
             objParser.parse();
             parsedObject = objParser.getParsedObject();
-            parsedObject.setScale(new Vector3(100, 100, 100));
+            parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, 0);
+            parsedObject.setScale(new Vector3(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR));
+
+
+            Material material = new Material();
+            material.addTexture(new org.rajawali3d.materials.textures.Texture("material0",
+                    R.drawable.model01));
+            material.setColorInfluence(0);
+            parsedObject.setMaterial(material);
+
             getCurrentScene().addChild(parsedObject);
 
         } catch (ParsingException e) {
+            e.printStackTrace();
+        } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }
 
@@ -348,6 +362,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
 
     @Override
     public void onTouchEvent(MotionEvent event) {
+
         int action = MotionEventCompat.getActionMasked(event);
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
@@ -392,8 +407,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
                     System.out.println("X:" + currentObjectPoint.x + "   Y:" + currentObjectPoint.y);
                     int deltaX = currentObjectPoint.x - previousObjectPoint.x;
                     int deltaY = currentObjectPoint.y - previousObjectPoint.y;
-                    parsedObject.setX(parsedObject.getX() + (deltaX / 300F));
-                    parsedObject.setZ(parsedObject.getZ() + (deltaY / 300F));
+                    parsedObject.setX(parsedObject.getX() + (deltaX));
+                    parsedObject.setY(parsedObject.getY() - (deltaY));
                 }
             case (MotionEvent.ACTION_UP):
                 System.out.println("Action was UP");
