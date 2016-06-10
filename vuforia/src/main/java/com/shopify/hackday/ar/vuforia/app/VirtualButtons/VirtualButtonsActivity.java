@@ -243,14 +243,18 @@ public class VirtualButtonsActivity extends Activity implements
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        // Delegating the touchEvent
+        mRenderer.onTouchEvent(event);
+
+        /* Disabling the sidebar menu to allow for gestures.
         // Process the Gestures
         if (mSampleAppMenu != null && mSampleAppMenu.processEvent(event))
             return true;
-        
+        */
+
         return mGestureDetector.onTouchEvent(event);
     }
-    
-    
+
     private void startLoadingAnimation()
     {
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -273,22 +277,16 @@ public class VirtualButtonsActivity extends Activity implements
             LayoutParams.MATCH_PARENT));
     }
     
-    
     // Initializes AR application components.
     private void initApplicationAR()
     {
         mGlView = new SampleApplicationGLView(this);
         
-        mRenderer = getRenderer();
+        mRenderer = new VirtualButtonRenderer(this, vuforiaAppSession);
         mGlView.setSurfaceRenderer(mRenderer);
         
     }
 
-    protected VirtualButtonRenderer getRenderer(){
-        return new VirtualButtonRenderer(this, vuforiaAppSession);
-    }
-    
-    
     @Override
     public boolean doInitTrackers()
     {

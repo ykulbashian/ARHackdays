@@ -588,8 +588,7 @@ public class SampleApplicationSession implements UpdateCallbackInterface
     // rendering
     public void setProjectionMatrix()
     {
-        CameraCalibration camCal = CameraDevice.getInstance()
-            .getCameraCalibration();
+        CameraCalibration camCal = CameraDevice.getInstance().getCameraCalibration();
         mProjectionMatrix = Tool.getProjectionGL(camCal, 10.0f, 5000.0f);
     }
     
