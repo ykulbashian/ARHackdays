@@ -306,7 +306,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     private Point currentObjectPoint, previousObjectPoint;
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
-    private static final float SCALE_FACTOR = 50f;
+    private static final float SCALE_FACTOR = 300f;
 
     @Override
     protected void initScene() {
@@ -319,8 +319,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
         prevPointer2 = new MotionEvent.PointerCoords();
 
         light1 = new PointLight();
-        light1.setPosition(100, 100, 100);
-        light1.setPower(200);
+        light1.setPosition(-2*SCALE_FACTOR, 2*SCALE_FACTOR, -2*SCALE_FACTOR);
+        light1.setPower(2*SCALE_FACTOR);
         light2 = new PointLight();
         light2.setPosition(5*SCALE_FACTOR, 5*SCALE_FACTOR, 5*SCALE_FACTOR);
         light2.setPower(8*SCALE_FACTOR);
@@ -331,17 +331,18 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
 
         getCurrentCamera().setFarPlane(1000);
 
-        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.cube);
+        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
         try {
             objParser.parse();
             parsedObject = objParser.getParsedObject();
+            parsedObject.setRotZ(90);
             parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, 0);
             parsedObject.setScale(new Vector3(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR));
 
 
             Material material = new Material();
             material.addTexture(new org.rajawali3d.materials.textures.Texture("material0",
-                    R.drawable.model01));
+                    R.drawable.couch_image));
             material.setColorInfluence(0);
             parsedObject.setMaterial(material);
 
