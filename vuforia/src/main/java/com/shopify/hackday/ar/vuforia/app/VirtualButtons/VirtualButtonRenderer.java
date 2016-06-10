@@ -19,14 +19,12 @@ import android.view.MotionEvent;
 
 import com.shopify.hackday.ar.vuforia.R;
 import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.utils.CubeObject;
 import com.shopify.hackday.ar.vuforia.utils.CubeShaders;
 import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
 import com.shopify.hackday.ar.vuforia.utils.Teapot;
 import com.shopify.hackday.ar.vuforia.utils.Texture;
-import com.vuforia.CameraCalibration;
-import com.vuforia.CameraDevice;
 import com.vuforia.ImageTargetResult;
-import com.vuforia.Matrix34F;
 import com.vuforia.Renderer;
 import com.vuforia.State;
 import com.vuforia.Tool;
@@ -41,6 +39,7 @@ import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.Quaternion;
+import org.rajawali3d.math.vector.Vector3;
 
 import java.util.Vector;
 
@@ -61,7 +60,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     // The textures we will use for rendering:
     private Vector<Texture> mTextures;
 
-    private Teapot mTeapot = new Teapot();
+    private CubeObject mTeapot = new CubeObject();
 
     // OpenGL ES 2.0 specific (3D model):
     private int shaderProgramID = 0;
@@ -72,7 +71,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     private int texSampler2DHandle = 0;
 
     // Constants:
-    static private float kTeapotScale = 3.f;
+    static private float kTeapotScale = 5f;
 
 
     public VirtualButtonRenderer(VirtualButtonsActivity activity,
@@ -285,6 +284,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     }
 
 
+
+
     class FloatingPoint {
 
         public double x;
@@ -300,14 +301,12 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     private PointLight light1, light2;
     private Object3D parsedObject;
 
-    //    private PointLight light1;
     private Point currentObjectPoint, previousObjectPoint;
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
 
     @Override
     protected void initScene() {
-        Animation3D cameraAnim, lightAnim;
 
         currentObjectPoint = new Point(0, 0);
         previousObjectPoint = new Point(0, 0);
@@ -317,52 +316,29 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
         prevPointer2 = new MotionEvent.PointerCoords();
 
         light1 = new PointLight();
-        light1.setPosition(5, 5, 5);
-        light1.setPower(8);
+        light1.setPosition(100, 100, 100);
+        light1.setPower(200);
         light2 = new PointLight();
         light2.setPosition(5, 5, 5);
         light2.setPower(8);
 
         getCurrentScene().addLight(light1);
         getCurrentScene().addLight(light2);
-        getCurrentCamera().setZ(8);
-//        getCurrentCamera().setPosition(0, 2, 4);
-//        getCurrentCamera().setLookAt(0, 0, 0);
+        getCurrentScene().alwaysClearColorBuffer(false);
+
+        getCurrentCamera().setFarPlane(1000);
 
         LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
         try {
             objParser.parse();
             parsedObject = objParser.getParsedObject();
+            parsedObject.setScale(new Vector3(100, 100, 100));
             getCurrentScene().addChild(parsedObject);
 
         } catch (ParsingException e) {
             e.printStackTrace();
         }
 
-/*
-        cameraAnim = new RotateOnAxisAnimation(Vector3.Axis.Y, 360);
-        cameraAnim.setDurationMilliseconds(8000);
-        cameraAnim.setRepeatMode(Animation.RepeatMode.INFINITE);
-        cameraAnim.setTransformable3D(parsedObject);
-
-        lightAnim = new EllipticalOrbitAnimation3D(new Vector3(),
-                new Vector3(0, 10, 0), Vector3.getAxisVector(Vector3.Axis.Z), 0,
-                360, EllipticalOrbitAnimation3D.OrbitDirection.CLOCKWISE);
-
-        lightAnim.setDurationMilliseconds(3000);
-        lightAnim.setRepeatMode(Animation.RepeatMode.INFINITE);
-        lightAnim.setTransformable3D(light);
-
-        getCurrentScene().registerAnimation(cameraAnim);
-        getCurrentScene().registerAnimation(lightAnim);
-*/
-
-        getCurrentScene().alwaysClearColorBuffer(false);
-
-/*
-        cameraAnim.play();
-        lightAnim.play();
-*/
     }
 
     @Override
@@ -435,22 +411,28 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     @Override
     public void onRenderFrame(GL10 gl) {
 
-        onDrawFrame(gl);
-
-        // FIXME / TODO This is broken, but could be a good start to hook tracking data to model.
-        // Get the state from Vuforia and mark the beginning of a rendering section
         State state = Renderer.getInstance().begin();
-        // Did we find any trackables this frame?
+
+
+        Renderer.getInstance().drawVideoBackground();
+
         if (state.getNumTrackableResults() > 0) {
-            // Get the trackable:
+            parsedObject.setVisible(true);
+
             TrackableResult trackableResult = state.getTrackableResult(0);
             float[] modelViewMatrix = Tool.convertPose2GLMatrix(trackableResult.getPose()).getData();
-//            parsedObject.getModelViewMatrix().setAll(modelViewMatrix);
 
-            // Looks potentially like the right thing to do.
-            getCurrentCamera().setProjectionMatrix(new Matrix4(vuforiaAppSession.getProjectionMatrix().getData()));
+            float[] modelViewProjectionScaled = new float[16];
+            Matrix.multiplyMM(modelViewProjectionScaled, 0, vuforiaAppSession
+                    .getProjectionMatrix().getData(), 0, modelViewMatrix, 0);
+
+            Matrix4 m = new Matrix4(modelViewProjectionScaled);
+
+            getCurrentCamera().setProjectionMatrix(m);
+
+        } else {
+            parsedObject.setVisible(false);
         }
-        // FIXME / TODO This is broken, but could be a good start to hook tracking data to model.
 
         super.onRenderFrame(gl);
     }
