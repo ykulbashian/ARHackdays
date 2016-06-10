@@ -335,6 +335,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
         getCurrentScene().registerAnimation(cameraAnim);
         getCurrentScene().registerAnimation(lightAnim);
 
+        getCurrentScene().alwaysClearColorBuffer(false);
+
         cameraAnim.play();
         lightAnim.play();
     }
@@ -347,5 +349,27 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     @Override
     public void onTouchEvent(MotionEvent event) {
 
+    }
+
+    @Override
+    public void onRenderFrame(GL10 gl) {
+
+        onDrawFrame(gl);
+
+        super.onRenderFrame(gl);
+    }
+
+    @Override
+    public void onRenderSurfaceCreated(EGLConfig config, GL10 gl, int width, int height) {
+        super.onRenderSurfaceCreated(config, gl, width, height);
+
+        onSurfaceCreated(gl, config);
+    }
+
+    @Override
+    public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
+        super.onRenderSurfaceSizeChanged(gl, width, height);
+
+        onSurfaceChanged(gl, width, height);
     }
 }

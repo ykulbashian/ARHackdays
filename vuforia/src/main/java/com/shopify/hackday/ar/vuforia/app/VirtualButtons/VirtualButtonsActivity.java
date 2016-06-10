@@ -280,7 +280,7 @@ public class VirtualButtonsActivity extends Activity implements
         mGlView = new SampleApplicationGLView(this);
         
         mRenderer = getRenderer();
-        mGlView.setRenderer(mRenderer);
+        mGlView.setSurfaceRenderer(mRenderer);
         
     }
 
