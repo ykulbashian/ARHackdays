@@ -28,10 +28,14 @@
 
       if (files.length > 0 && shopID.length > 0 && productID.length > 0)
       {
-        var key = shopID + productID;
-        var modelString = btoa(file);
-
-        firebase.database().ref(key).set(modelString);
+        var fr = new FileReader();
+        fr.onload = function(event) {
+          var text = fr.result
+          var key = shopID + productID;
+          firebase.database().ref(key).set(text);
+          alert(text);
+        };
+        fr.readAsText(file);
 
         alert("Model successfully uploaded!");
         document.getElementById('shop_id').reset();
