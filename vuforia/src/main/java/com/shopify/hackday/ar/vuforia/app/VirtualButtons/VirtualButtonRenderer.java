@@ -306,7 +306,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     private Point currentObjectPoint, previousObjectPoint;
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
-    private static final float SCALE_FACTOR = 300f;
+    private static final float SCALE_FACTOR = 260f;
 
     @Override
     protected void initScene() {
@@ -336,7 +336,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
             objParser.parse();
             parsedObject = objParser.getParsedObject();
             parsedObject.setRotZ(90);
-            parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, 0);
+            parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, SCALE_FACTOR/2);
             parsedObject.setScale(new Vector3(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR));
 
 
