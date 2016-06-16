@@ -79,7 +79,7 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
     private Point currentObjectPoint, previousObjectPoint;
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
-    private static final float SCALE_FACTOR = 200f;
+    private static final float SCALE_FACTOR = 20f;
 
     @Override
     protected void initScene() {
@@ -104,12 +104,12 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
 
         getCurrentCamera().setFarPlane(1000);
 
-        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.model01_obj);
+        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.couch_model);
         try {
             objParser.parse();
             parsedObject = objParser.getParsedObject();
-            parsedObject.setRotZ(90);
-            parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, SCALE_FACTOR/2);
+            parsedObject.setRotZ(-90);
+            parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, 0);
             parsedObject.setScale(new Vector3(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR));
 
 
@@ -142,20 +142,17 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
                 if (event.getPointerCount() == 2) {
-                    System.out.println("TWO FINGER DOWN");
                     rotation.twoFingers = true;
                     event.getPointerCoords(0, curPointer1);
                     event.getPointerCoords(0, prevPointer1);
                     event.getPointerCoords(1, curPointer2);
                     event.getPointerCoords(1, prevPointer2);
                 } else {
-                    System.out.println("Action was DOWN");
                     currentObjectPoint.set((int) event.getX(), (int) event.getY());
                     previousObjectPoint.set(currentObjectPoint.x, currentObjectPoint.y);
                 }
             case (MotionEvent.ACTION_MOVE):
                 if (event.getPointerCount() == 2) {
-                    System.out.println("TWO TOUCH MOVE");
                     if (!rotation.twoFingers) {
                         event.getPointerCoords(0, curPointer1);
                         event.getPointerCoords(0, prevPointer1);
@@ -176,20 +173,16 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
                     rotation.x = (rotation.x + (v1x + v2x) / (-7)) % 360;
                     parsedObject.setRotY(rotation.x);
                 } else if (!rotation.twoFingers) {
-                    System.out.println("Action was MOVE");
                     previousObjectPoint.set(currentObjectPoint.x, currentObjectPoint.y);
                     currentObjectPoint.set((int) event.getX(), (int) event.getY());
-                    System.out.println("X:" + currentObjectPoint.x + "   Y:" + currentObjectPoint.y);
                     int deltaX = currentObjectPoint.x - previousObjectPoint.x;
                     int deltaY = currentObjectPoint.y - previousObjectPoint.y;
                     parsedObject.setX(parsedObject.getX() + (deltaX));
                     parsedObject.setY(parsedObject.getY() - (deltaY));
                 }
             case (MotionEvent.ACTION_UP):
-                System.out.println("Action was UP");
                 rotation.twoFingers = false;
             case (MotionEvent.ACTION_CANCEL):
-                System.out.println("Action was CANCEL");
             case (MotionEvent.ACTION_OUTSIDE):
                 System.out.println("Movement occurred outside bounds " +
                         "of current screen element");
