@@ -57,15 +57,10 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements 
 
     public boolean mIsActive = false;
 
-    private VirtualButtonsActivity mActivity;
-
-    // The textures we will use for rendering:
-    private Vector<Texture> mTextures;
 
     public CameraRenderer(VirtualButtonsActivity activity,
                           SampleApplicationSession session) {
         super(activity);
-        mActivity = activity;
         vuforiaAppSession = session;
     }
 
@@ -77,51 +72,16 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements 
     // Called when the surface is created or recreated.
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        Log.d(LOGTAG, "GLRenderer.onSurfaceCreated");
-
-
-        // Load any sample specific textures:
-        mTextures = new Vector<Texture>();
-        loadTextures();
-
-
-        // Call function to initialize rendering:
-        initRendering();
-
-        // Call Vuforia function to (re)initialize rendering after first use
-        // or after OpenGL ES context was lost (e.g. after onPause/onResume):
-        vuforiaAppSession.onSurfaceCreated();
     }
 
     public void onSurfaceDestroyed() {
 
-        // Unload texture:
-        mTextures.clear();
-        mTextures = null;
     }
 
-    // We want to load specific textures from the APK, which we will later use
-    // for rendering.
-    private void loadTextures() {
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
-                mActivity.getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
-                mActivity.getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
-                mActivity.getAssets()));
-        mTextures.add(Texture.loadTextureFromApk(
-                "VirtualButtons/TextureTeapotYellow.png", mActivity.getAssets()));
-        mTextures.add(Texture.loadTextureFromApk(
-                "VirtualButtons/TextureTeapotGreen.png", mActivity.getAssets()));
-    }
 
     // Called when the surface changed size.
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        Log.d(LOGTAG, "GLRenderer.onSurfaceChanged");
-
-        // Call Vuforia function to handle render surface size changes:
-        vuforiaAppSession.onSurfaceChanged(width, height);
     }
 
 
@@ -133,27 +93,6 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements 
 
     }
 
-
-    private void initRendering() {
-        Log.d(LOGTAG, "VirtualButtonsRenderer.initRendering");
-
-        // Define clear color
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, Vuforia.requiresAlpha() ? 0.0f : 1.0f);
-
-        // Now generate the OpenGL texture objects and add settings
-        for (Texture t : mTextures) {
-            GLES20.glGenTextures(1, t.mTextureID, 0);
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, t.mTextureID[0]);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA,
-                    t.mWidth, t.mHeight, 0, GLES20.GL_RGBA,
-                    GLES20.GL_UNSIGNED_BYTE, t.mData);
-        }
-
-    }
 
 
     class FloatingPoint {
@@ -325,14 +264,20 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements 
     @Override
     public void onRenderSurfaceCreated(EGLConfig config, GL10 gl, int width, int height) {
         super.onRenderSurfaceCreated(config, gl, width, height);
+        Log.d(LOGTAG, "GLRenderer.onSurfaceCreated");
 
-        onSurfaceCreated(gl, config);
+        // Call Vuforia function to (re)initialize rendering after first use
+        // or after OpenGL ES context was lost (e.g. after onPause/onResume):
+        vuforiaAppSession.onSurfaceCreated();
     }
 
     @Override
     public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
         super.onRenderSurfaceSizeChanged(gl, width, height);
 
-        onSurfaceChanged(gl, width, height);
+        Log.d(LOGTAG, "GLRenderer.onSurfaceChanged");
+
+        // Call Vuforia function to handle render surface size changes:
+        vuforiaAppSession.onSurfaceChanged(width, height);
     }
 }
