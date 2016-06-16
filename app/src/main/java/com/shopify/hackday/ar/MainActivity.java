@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.net.Uri;
 
-import com.shopify.hackday.ar.vuforia.app.VirtualButtons.VirtualButtonsActivity;
+import com.shopify.hackday.ar.vuforia.app.VirtualButtons.BaseActivity;
 
 
-public class MainActivity extends VirtualButtonsActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

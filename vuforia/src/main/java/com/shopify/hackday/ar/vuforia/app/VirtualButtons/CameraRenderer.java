@@ -44,7 +44,7 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
     public boolean mIsActive = false;
 
 
-    public CameraRenderer(VirtualButtonsActivity activity,
+    public CameraRenderer(BaseActivity activity,
                           SampleApplicationSession session) {
         super(activity);
         vuforiaAppSession = session;
