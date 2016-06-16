@@ -49,9 +49,9 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer implements GLSurfaceView.Renderer {
+public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements GLSurfaceView.Renderer {
 
-    private static final String LOGTAG = "VirtualButtonRenderer";
+    private static final String LOGTAG = "CameraRenderer";
 
     private SampleApplicationSession vuforiaAppSession;
 
@@ -76,8 +76,8 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
     static private float kTeapotScale = 5f;
 
 
-    public VirtualButtonRenderer(VirtualButtonsActivity activity,
-                                 SampleApplicationSession session) {
+    public CameraRenderer(VirtualButtonsActivity activity,
+                          SampleApplicationSession session) {
         super(activity);
         mActivity = activity;
         vuforiaAppSession = session;

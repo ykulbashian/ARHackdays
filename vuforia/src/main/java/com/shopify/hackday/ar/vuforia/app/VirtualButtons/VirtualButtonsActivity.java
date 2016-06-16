@@ -10,15 +10,12 @@ countries.
 
 package com.shopify.hackday.ar.vuforia.app.VirtualButtons;
 
-import java.util.Vector;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -41,7 +38,6 @@ import com.vuforia.Trackable;
 import com.vuforia.Tracker;
 import com.vuforia.TrackerManager;
 import com.vuforia.VirtualButton;
-import com.vuforia.Vuforia;
 import com.shopify.hackday.ar.vuforia.SampleApplicationControl;
 import com.shopify.hackday.ar.vuforia.SampleApplicationException;
 import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
@@ -64,7 +60,7 @@ public class VirtualButtonsActivity extends Activity implements
     private SampleApplicationGLView mGlView;
     
     // Our renderer:
-    private VirtualButtonRenderer mRenderer;
+    private CameraRenderer mRenderer;
     
     private RelativeLayout mUILayout;
     
@@ -282,7 +278,7 @@ public class VirtualButtonsActivity extends Activity implements
     {
         mGlView = new SampleApplicationGLView(this);
         
-        mRenderer = new VirtualButtonRenderer(this, vuforiaAppSession);
+        mRenderer = new CameraRenderer(this, vuforiaAppSession);
         mGlView.setSurfaceRenderer(mRenderer);
         
     }
