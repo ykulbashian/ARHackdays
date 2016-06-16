@@ -10,7 +10,6 @@ countries.
 package com.shopify.hackday.ar.vuforia.app.VirtualButtons;
 
 import android.graphics.Point;
-import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
@@ -36,7 +35,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements GLSurfaceView.Renderer {
+public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
 
     private static final String LOGTAG = "CameraRenderer";
 
@@ -56,27 +55,7 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer implements 
     }
 
 
-    // Called when the surface is created or recreated.
-    @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    }
-
     public void onSurfaceDestroyed() {
-
-    }
-
-
-    // Called when the surface changed size.
-    @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-    }
-
-
-    // Called to draw the current frame.
-    @Override
-    public void onDrawFrame(GL10 gl) {
-        if (!mIsActive)
-            return;
 
     }
 
