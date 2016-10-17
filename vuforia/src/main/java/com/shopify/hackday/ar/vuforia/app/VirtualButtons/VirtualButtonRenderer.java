@@ -22,7 +22,6 @@ import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
 import com.shopify.hackday.ar.vuforia.utils.CubeObject;
 import com.shopify.hackday.ar.vuforia.utils.CubeShaders;
 import com.shopify.hackday.ar.vuforia.utils.SampleUtils;
-import com.shopify.hackday.ar.vuforia.utils.Teapot;
 import com.shopify.hackday.ar.vuforia.utils.Texture;
 import com.vuforia.ImageTargetResult;
 import com.vuforia.Renderer;
@@ -33,14 +32,12 @@ import com.vuforia.VIDEO_BACKGROUND_REFLECTION;
 import com.vuforia.Vuforia;
 
 import org.rajawali3d.Object3D;
-import org.rajawali3d.animation.Animation3D;
 import org.rajawali3d.lights.PointLight;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.math.Matrix4;
-import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector3;
 
 import java.util.Vector;
@@ -95,7 +92,7 @@ public class VirtualButtonRenderer extends org.rajawali3d.renderer.Renderer impl
 
 
         // Load any sample specific textures:
-        mTextures = new Vector<Texture>();
+        mTextures = new Vector<>();
         loadTextures();
 
 

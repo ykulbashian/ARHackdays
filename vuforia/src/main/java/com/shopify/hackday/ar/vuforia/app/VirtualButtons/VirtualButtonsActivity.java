@@ -10,15 +10,12 @@ countries.
 
 package com.shopify.hackday.ar.vuforia.app.VirtualButtons;
 
-import java.util.Vector;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -30,26 +27,25 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 
 import com.shopify.hackday.ar.vuforia.R;
+import com.shopify.hackday.ar.vuforia.SampleApplicationControl;
+import com.shopify.hackday.ar.vuforia.SampleApplicationException;
+import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenu;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
+import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
+import com.shopify.hackday.ar.vuforia.utils.LoadingDialogHandler;
+import com.shopify.hackday.ar.vuforia.utils.SampleApplicationGLView;
 import com.vuforia.CameraDevice;
 import com.vuforia.DataSet;
 import com.vuforia.ImageTarget;
 import com.vuforia.ObjectTracker;
 import com.vuforia.Rectangle;
-import com.vuforia.State;
 import com.vuforia.STORAGE_TYPE;
+import com.vuforia.State;
 import com.vuforia.Trackable;
 import com.vuforia.Tracker;
 import com.vuforia.TrackerManager;
 import com.vuforia.VirtualButton;
-import com.vuforia.Vuforia;
-import com.shopify.hackday.ar.vuforia.SampleApplicationControl;
-import com.shopify.hackday.ar.vuforia.SampleApplicationException;
-import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
-import com.shopify.hackday.ar.vuforia.utils.LoadingDialogHandler;
-import com.shopify.hackday.ar.vuforia.utils.SampleApplicationGLView;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenu;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
 
 
 // The main activity for the VirtualButtonsActivity sample.
@@ -234,7 +230,9 @@ public class VirtualButtonsActivity extends Activity implements
             Log.e(LOGTAG, e.getString());
         }
 
-        mRenderer.onSurfaceDestroyed();
+        if(mRenderer != null) {
+            mRenderer.onSurfaceDestroyed();
+        }
         
         System.gc();
     }
