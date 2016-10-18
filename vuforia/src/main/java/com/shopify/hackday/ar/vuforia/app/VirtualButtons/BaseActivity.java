@@ -230,7 +230,8 @@ public class BaseActivity extends Activity implements
             Log.e(LOGTAG, e.getString());
         }
 
-        mRenderer.onSurfaceDestroyed();
+        if(mRenderer != null)
+            mRenderer.onSurfaceDestroyed();
         
         System.gc();
     }

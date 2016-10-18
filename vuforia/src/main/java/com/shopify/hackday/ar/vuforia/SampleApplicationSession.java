@@ -37,7 +37,7 @@ import com.vuforia.Vuforia.UpdateCallbackInterface;
 public class SampleApplicationSession implements UpdateCallbackInterface
 {
     
-    private static final String LOGTAG = "Vuforia_Sample_Applications";
+    private static final String LOGTAG = "Vuforia";
     
     // Reference to the current activity
     private Activity mActivity;
@@ -377,7 +377,7 @@ public class SampleApplicationSession implements UpdateCallbackInterface
             // Prevent the onDestroy() method to overlap with initialization:
             synchronized (mShutdownLock)
             {
-                Vuforia.setInitParameters(mActivity, mVuforiaFlags, "Ab5dnOP/////AAAAASYYsuqLokd1shJNYbYWOyaOfNazgzMZ4tJF4WOfIZvmlPLF1Ar+5Tf0sK6HF6h/RSBRb2bAF24TuqEdseeru70+H8XcVCw6zQp724e/M4/YgUUoHEbF+dd15s48xgBaHooI7AM5Kn0Sm0T4vMmxclHKLE6YDzJCJi6u8ieFUDttcJnieKQpjjiJbKCFMtBLNVF6Rk1yKFnmFtqdU4XCalYR11t3HYZbAD617aAb+UevV3DNpuKMXLQoV9RSEUDy6u3ceu1ZV56UyZtaSqXEV3Kq+sWze68ItcC/LCnJwtuz5NKj2jVENfQPVt1T/tUG11ynTLnULN8orAyHrTbSMqGF2Cb/o/pK/aBPtGjD0cZF");
+                Vuforia.setInitParameters(mActivity, mVuforiaFlags, "ATCRaxf/////AAAAAR1avdPTd0cIrFw4CiB6NfVvRoWbax4rJhsT8uDU+/0xn8kRHlR71lysw5GtNdgwmUx8hyUND+MFx/CK7nORvORvWEHfVhr8M+XWpLalf0Vl8qHWGmNx5lvhHVu2GjC0j9GDgR8dHjuYXSBYZb95Mdv6qN3Xrt9rji+AImjKa56ThHz0JR7gBGjpeF9+nMyPEOYfEWpz4R9EbpqvPy1Aplsbw+L7Va5DoWa7Q/7ci0P86KkCkptwOEWxNZzDmjmjBrQ2PeCik9LXnljbvwUxFhSZWo6hZVDgA0xGasuGE00iZxAqIzusML+/rA4CbIpi0cWvMt+b0JzDhB36QbR+BcRhYf2R4VGAbm8Xhq9AdJvk");
                 
                 do
                 {
