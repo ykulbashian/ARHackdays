@@ -10,14 +10,20 @@ countries.
 
 package com.shopify.hackday.ar.vuforia.app.VirtualButtons;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -26,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 
+import com.shopify.hackday.ar.vuforia.ApplicationSession;
 import com.shopify.hackday.ar.vuforia.R;
 import com.vuforia.CameraDevice;
 import com.vuforia.DataSet;
@@ -38,23 +45,21 @@ import com.vuforia.Trackable;
 import com.vuforia.Tracker;
 import com.vuforia.TrackerManager;
 import com.vuforia.VirtualButton;
-import com.shopify.hackday.ar.vuforia.SampleApplicationControl;
-import com.shopify.hackday.ar.vuforia.SampleApplicationException;
-import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.ApplicationControl;
+import com.shopify.hackday.ar.vuforia.ApplicationException;
 import com.shopify.hackday.ar.vuforia.utils.LoadingDialogHandler;
 import com.shopify.hackday.ar.vuforia.utils.SampleApplicationGLView;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenu;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuGroup;
-import com.shopify.hackday.ar.vuforia.ui.SampleAppMenu.SampleAppMenuInterface;
 
 
 // The main activity for the BaseActivity sample.
-public class BaseActivity extends Activity implements
-    SampleApplicationControl, SampleAppMenuInterface
+public class BaseActivity extends AppCompatActivity implements
+        ApplicationControl
 {
     private static final String LOGTAG = "VirtualButtons";
+
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 0x55FF;
     
-    SampleApplicationSession vuforiaAppSession;
+    ApplicationSession vuforiaAppSession;
     
     // Our OpenGL view:
     private SampleApplicationGLView mGlView;
@@ -66,10 +71,7 @@ public class BaseActivity extends Activity implements
     
     private GestureDetector mGestureDetector;
     
-    private SampleAppMenu mSampleAppMenu;
-    
-    private LoadingDialogHandler loadingDialogHandler = new LoadingDialogHandler(
-        this);
+    private LoadingDialogHandler loadingDialogHandler = new LoadingDialogHandler(this);
     
     private DataSet dataSet = null;
     
@@ -100,10 +102,12 @@ public class BaseActivity extends Activity implements
         Log.d(LOGTAG, "onCreate");
         super.onCreate(savedInstanceState);
         
-        vuforiaAppSession = new SampleApplicationSession(this);
+        vuforiaAppSession = new ApplicationSession(this);
         
         startLoadingAnimation();
-        
+
+        checkPermissions(this);
+
         vuforiaAppSession
             .initAR(this, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -167,7 +171,7 @@ public class BaseActivity extends Activity implements
         try
         {
             vuforiaAppSession.resumeAR();
-        } catch (SampleApplicationException e)
+        } catch (ApplicationException e)
         {
             Log.e(LOGTAG, e.getString());
         }
@@ -180,7 +184,49 @@ public class BaseActivity extends Activity implements
         }
         
     }
-    
+
+
+    private void checkPermissions(Activity thisActivity){
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+        }
+        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
     
     @Override
     public void onConfigurationChanged(Configuration config)
@@ -208,7 +254,7 @@ public class BaseActivity extends Activity implements
         try
         {
             vuforiaAppSession.pauseAR();
-        } catch (SampleApplicationException e)
+        } catch (ApplicationException e)
         {
             Log.e(LOGTAG, e.getString());
         }
@@ -225,7 +271,7 @@ public class BaseActivity extends Activity implements
         try
         {
             vuforiaAppSession.stopAR();
-        } catch (SampleApplicationException e)
+        } catch (ApplicationException e)
         {
             Log.e(LOGTAG, e.getString());
         }
@@ -395,7 +441,7 @@ public class BaseActivity extends Activity implements
     
     
     @Override
-    public void onInitARDone(SampleApplicationException exception)
+    public void onInitARDone(ApplicationException exception)
     {
         
         if (exception == null)
@@ -424,7 +470,7 @@ public class BaseActivity extends Activity implements
             try
             {
                 vuforiaAppSession.startAR(CameraDevice.CAMERA_DIRECTION.CAMERA_DIRECTION_DEFAULT);
-            } catch (SampleApplicationException e)
+            } catch (ApplicationException e)
             {
                 Log.e(LOGTAG, e.getString());
             }
@@ -434,10 +480,6 @@ public class BaseActivity extends Activity implements
             
             if (!result)
                 Log.e(LOGTAG, "Unable to enable continuous autofocus");
-            
-            mSampleAppMenu = new SampleAppMenu(this, this, "Virtual Buttons",
-                mGlView, mUILayout, null);
-            setSampleAppMenuSettings();
             
         } else
         {
@@ -581,36 +623,7 @@ public class BaseActivity extends Activity implements
         
         return buttonToggleSuccess;
     }
-    
-    
-    private void addButtonToToggle(int virtualButtonIdx)
-    {
-        Log.d(LOGTAG, "addButtonToToggle");
-        
-        assert (virtualButtonIdx >= 0 && virtualButtonIdx < NUM_BUTTONS);
-        
-        switch (virtualButtonIdx)
-        {
-            case 0:
-                buttonMask |= BUTTON_1;
-                break;
-            
-            case 1:
-                buttonMask |= BUTTON_2;
-                break;
-            
-            case 2:
-                buttonMask |= BUTTON_3;
-                break;
-            
-            case 3:
-                buttonMask |= BUTTON_4;
-                break;
-        }
-        updateBtns = true;
-    }
-    
-    
+
     @Override
     public boolean doLoadTrackersData()
     {
@@ -658,60 +671,5 @@ public class BaseActivity extends Activity implements
     final public static int CMD_BUTTON_BLUE = 2;
     final public static int CMD_BUTTON_YELLOW = 3;
     final public static int CMD_BUTTON_GREEN = 4;
-    
-    
-    // This method sets the menu's settings
-    private void setSampleAppMenuSettings()
-    {
-        SampleAppMenuGroup group;
-        
-        group = mSampleAppMenu.addGroup("", false);
-        group.addTextItem(getString(R.string.menu_back), -1);
-        
-        group = mSampleAppMenu.addGroup("", true);
-        group.addSelectionItem(getString(R.string.menu_button_red),
-            CMD_BUTTON_RED, true);
-        group.addSelectionItem(getString(R.string.menu_button_blue),
-            CMD_BUTTON_BLUE, true);
-        group.addSelectionItem(getString(R.string.menu_button_yellow),
-            CMD_BUTTON_YELLOW, true);
-        group.addSelectionItem(getString(R.string.menu_button_green),
-            CMD_BUTTON_GREEN, true);
-        
-        mSampleAppMenu.attachMenu();
-    }
-    
-    
-    @Override
-    public boolean menuProcess(int command)
-    {
-        boolean result = true;
-        
-        switch (command)
-        {
-            case CMD_BACK:
-                finish();
-                break;
-            
-            case CMD_BUTTON_RED:
-                addButtonToToggle(0);
-                break;
-            
-            case CMD_BUTTON_BLUE:
-                addButtonToToggle(1);
-                break;
-            
-            case CMD_BUTTON_YELLOW:
-                addButtonToToggle(2);
-                break;
-            
-            case CMD_BUTTON_GREEN:
-                addButtonToToggle(3);
-                break;
-        
-        }
-        
-        return result;
-    }
     
 }

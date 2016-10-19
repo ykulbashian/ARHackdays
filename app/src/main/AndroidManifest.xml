@@ -72,36 +72,6 @@
           'android:screenOrientation' or in code by calling
           Activity.setRequestedOrientation().
         -->
-        
-        <!--<activity-->
-            <!--android:name=".MainActivity"-->
-            <!--android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"-->
-        	<!--android:theme="@style/SampleAppsTheme"-->
- 	        <!--android:launchMode="singleTask"-->
-            <!--&gt;-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                <!--<category android:name="android.intent.category.CATEGORY_BROWSABLE" />-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW"/>-->
-                <!--<category android:name="android.intent.category.BROWSABLE"/>-->
-                <!--<data android:scheme="https"-->
-                    <!--android:host="augmented-odds-and-ends.myshopify.com" />-->
-                <!--&lt;!&ndash;<data android:scheme="example"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:host="gizmos" />&ndash;&gt;-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-        <!--<activity android:name=".ObjLoadActivity">-->
-            <!--<intent-filter>-->
-                <!--<category android:name="android.intent.category.CATEGORY_BROWSABLE" />-->
-            <!--</intent-filter>-->
-
-
-
-        <!--</activity>-->
 
         <activity android:name=".MainActivity"
             android:launchMode="singleInstance">

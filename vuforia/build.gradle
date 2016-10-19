@@ -44,4 +44,5 @@ dependencies {
     compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
     compile 'org.rajawali3d:rajawali:1.1.517-SNAPSHOT'
     compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
 }

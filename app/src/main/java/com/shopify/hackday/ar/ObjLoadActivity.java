@@ -27,7 +27,7 @@ public class ObjLoadActivity extends AppCompatActivity {
         private Object3D objectGroup;
         private Animation3D cameraAnim, lightAnim;
 
-        public LoadModelRenderer(Context context) {
+        LoadModelRenderer(Context context) {
             super(context);
         }
 
@@ -92,7 +92,7 @@ public class ObjLoadActivity extends AppCompatActivity {
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.rajwali_surface);
         surfaceView.setTransparent(true);
 
-        renderSurface = (ISurface) surfaceView;
+        renderSurface = surfaceView;
         // Create the renderer
         renderer = new LoadModelRenderer(this);
         // Apply the renderer

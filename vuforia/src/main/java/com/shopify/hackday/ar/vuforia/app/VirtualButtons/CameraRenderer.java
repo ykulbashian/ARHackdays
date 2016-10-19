@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.shopify.hackday.ar.vuforia.R;
-import com.shopify.hackday.ar.vuforia.SampleApplicationSession;
+import com.shopify.hackday.ar.vuforia.ApplicationSession;
 import com.vuforia.Renderer;
 import com.vuforia.State;
 import com.vuforia.Tool;
@@ -35,45 +35,43 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 
-public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
+class CameraRenderer extends org.rajawali3d.renderer.Renderer {
 
     private static final String LOGTAG = "CameraRenderer";
 
-    private SampleApplicationSession vuforiaAppSession;
+    private ApplicationSession vuforiaAppSession;
+    private boolean isActive;
 
-    public boolean mIsActive = false;
 
-
-    public CameraRenderer(BaseActivity activity,
-                          SampleApplicationSession session) {
+    CameraRenderer(BaseActivity activity,
+                          ApplicationSession session) {
         super(activity);
         vuforiaAppSession = session;
     }
 
+
+    void onSurfaceDestroyed() {
+
+    }
+
     public void setIsActive(boolean isActive) {
-        this.mIsActive = isActive;
+        this.isActive = isActive;
     }
 
 
-    public void onSurfaceDestroyed() {
+    private static class FloatingPoint {
 
-    }
+        double x;
+        boolean twoFingers;
 
-
-
-    class FloatingPoint {
-
-        public double x;
-        public boolean twoFingers;
-
-        public FloatingPoint() {
+        FloatingPoint() {
             x = 0;
             twoFingers = false;
         }
     }
-    final FloatingPoint rotation = new FloatingPoint();
 
-    private PointLight light1, light2;
+    private final FloatingPoint rotation = new FloatingPoint();
+
     private Object3D parsedObject;
 
     private Point currentObjectPoint, previousObjectPoint;
@@ -91,10 +89,10 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
         curPointer2 = new MotionEvent.PointerCoords();
         prevPointer2 = new MotionEvent.PointerCoords();
 
-        light1 = new PointLight();
+        PointLight light1 = new PointLight();
         light1.setPosition(-2*SCALE_FACTOR, 2*SCALE_FACTOR, -2*SCALE_FACTOR);
         light1.setPower(2*SCALE_FACTOR);
-        light2 = new PointLight();
+        PointLight light2 = new PointLight();
         light2.setPosition(5*SCALE_FACTOR, 5*SCALE_FACTOR, 5*SCALE_FACTOR);
         light2.setPower(8*SCALE_FACTOR);
 
@@ -121,9 +119,7 @@ public class CameraRenderer extends org.rajawali3d.renderer.Renderer {
 
             getCurrentScene().addChild(parsedObject);
 
-        } catch (ParsingException e) {
-            e.printStackTrace();
-        } catch (ATexture.TextureException e) {
+        } catch (ParsingException | ATexture.TextureException e) {
             e.printStackTrace();
         }
 

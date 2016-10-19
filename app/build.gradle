@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-//    compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
     compile project(':vuforia')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
