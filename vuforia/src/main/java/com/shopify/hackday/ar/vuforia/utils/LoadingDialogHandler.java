@@ -29,7 +29,7 @@ public final class LoadingDialogHandler extends Handler
     
     public LoadingDialogHandler(Activity activity)
     {
-        mActivity = new WeakReference<Activity>(activity);
+        mActivity = new WeakReference<>(activity);
     }
     
     

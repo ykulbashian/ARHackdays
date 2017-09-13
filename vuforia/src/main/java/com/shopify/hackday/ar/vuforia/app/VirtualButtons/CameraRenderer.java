@@ -78,6 +78,7 @@ class CameraRenderer extends org.rajawali3d.renderer.Renderer {
     private MotionEvent.PointerCoords curPointer1, curPointer2, prevPointer1, prevPointer2;
 
     private static final float SCALE_FACTOR = 20f;
+    private static final float LIGHT_SCALE_FACTOR = 10f;
 
     @Override
     protected void initScene() {
@@ -90,11 +91,11 @@ class CameraRenderer extends org.rajawali3d.renderer.Renderer {
         prevPointer2 = new MotionEvent.PointerCoords();
 
         PointLight light1 = new PointLight();
-        light1.setPosition(-2*SCALE_FACTOR, 2*SCALE_FACTOR, -2*SCALE_FACTOR);
-        light1.setPower(2*SCALE_FACTOR);
+        light1.setPosition(-2*LIGHT_SCALE_FACTOR, 2*LIGHT_SCALE_FACTOR, -2*LIGHT_SCALE_FACTOR);
+        light1.setPower(2*LIGHT_SCALE_FACTOR);
         PointLight light2 = new PointLight();
-        light2.setPosition(5*SCALE_FACTOR, 5*SCALE_FACTOR, 5*SCALE_FACTOR);
-        light2.setPower(8*SCALE_FACTOR);
+        light2.setPosition(5*LIGHT_SCALE_FACTOR, 5*LIGHT_SCALE_FACTOR, 5*LIGHT_SCALE_FACTOR);
+        light2.setPower(8*LIGHT_SCALE_FACTOR);
 
         getCurrentScene().addLight(light1);
         getCurrentScene().addLight(light2);
@@ -102,20 +103,21 @@ class CameraRenderer extends org.rajawali3d.renderer.Renderer {
 
         getCurrentCamera().setFarPlane(1000);
 
-        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.couch_model);
+        LoaderOBJ objParser = new LoaderOBJ(mContext.getResources(), mTextureManager, R.raw.untitled);
         try {
             objParser.parse();
             parsedObject = objParser.getParsedObject();
-            parsedObject.setRotZ(-90);
+//            parsedObject.setRotZ(-90);
             parsedObject.setPosition(-SCALE_FACTOR/2, -SCALE_FACTOR/2, 0);
             parsedObject.setScale(new Vector3(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR));
+            parsedObject.setBackSided(true);
 
 
             Material material = new Material();
             material.addTexture(new org.rajawali3d.materials.textures.Texture("material0",
                     R.drawable.couch_image));
             material.setColorInfluence(0);
-            parsedObject.setMaterial(material);
+//            parsedObject.setMaterial(material);
 
             getCurrentScene().addChild(parsedObject);
 

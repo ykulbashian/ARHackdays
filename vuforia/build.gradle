@@ -27,14 +27,16 @@ android {
         release {
             minifyEnabled false
             ndk {
-                abiFilters "armeabi-v7a"
+                abiFilters = []
+                abiFilters.addAll(['armeabi','armeabi-v7a', 'x86'])
             }
         }
         debug {
             minifyEnabled false
             debuggable true
             ndk {
-                abiFilters "armeabi-v7a"
+                abiFilters = []
+                abiFilters.addAll(['armeabi','armeabi-v7a', 'x86'])
             }
         }
     }
